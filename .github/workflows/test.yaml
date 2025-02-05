@@ -1,0 +1,31 @@
+name: Get JFrog Token
+on: [push]
+
+permissions:
+  id-token: write
+
+jobs:
+  get-token:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
+        env:
+          JF_URL: https://trialwihndm.jfrog.io
+        with:
+          oidc-provider-name: github-action-test
+          oidc-audience: emu
+          
+      - name: Get Token Output
+        run: |
+          # Get the token from the environment variable
+          TOKEN=$(jf rt c export)
+          # Print token value (masked in logs for security)
+          echo "::add-mask::$TOKEN"
+          echo "JFROG_TOKEN=$TOKEN" >> $GITHUB_ENV
+          
+      - name: Use Token
+        run: |
+          # Access token from environment variable
+          echo "Token is available as ${{ env.JFROG_TOKEN }}"
