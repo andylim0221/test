@@ -10,7 +10,7 @@ jobs:
         contents: read
         id-token: write
     runs-on: ubuntu-latest
-    environment: dev
+    environment: ''
     steps:
     - name: Get id token
       run: |
