@@ -10,7 +10,6 @@ jobs:
         contents: read
         id-token: write
     runs-on: ubuntu-latest
-    environment: ''
     steps:
       - name: Azure login
         uses: azure/login@v2
