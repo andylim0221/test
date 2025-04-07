@@ -7,3 +7,7 @@ output "name" {
 output "tenant" {
   value = data.azuread_client_config.current.tenant_id
 }
+
+output "object" {
+  value = data.azuread_client_config.current.object_id
+}
